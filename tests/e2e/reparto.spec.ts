@@ -11,5 +11,5 @@ test('endpoint /health responde ok y / redirige a /acceso sin sesión', async ({
 
   await page.goto('/');
   await expect(page).toHaveURL(/\/acceso/);
-  await expect(page.getByRole('heading', { name: 'Acceso al reparto' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Entrar al reparto' })).toBeVisible();
 });
