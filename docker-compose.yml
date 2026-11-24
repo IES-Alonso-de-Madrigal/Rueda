@@ -1,0 +1,27 @@
+services:
+  rueda:
+    build: .
+    container_name: rueda
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      ORIGIN: ${ORIGIN:-http://localhost:3000}
+      DATABASE_PATH: /data/app.db
+      TZ: Europe/Madrid
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+    volumes:
+      - ./data:/data
+
+  # Opcional: túnel Cloudflare (descomentar y definir CLOUDFLARED_TOKEN en .env)
+  # cloudflared:
+  #   image: cloudflare/cloudflared:latest
+  #   restart: unless-stopped
+  #   command: tunnel --no-autoupdate run --token ${CLOUDFLARED_TOKEN}
+  #   depends_on:
+  #     - rueda

@@ -1,0 +1,21 @@
+ensenanza;curso;grupo;turno;materia;horas;especialidades;tipo
+FP Grado Superior;1º;DAW1;Mañana;Programación;8;107;normal
+FP Grado Superior;1º;DAW1;Mañana;Bases de Datos;6;107;normal
+FP Grado Superior;1º;DAW1;Mañana;Sistemas Informáticos;6;107|227;normal
+FP Grado Superior;1º;DAW1;Mañana;Lenguajes de Marcas;4;107|227;normal
+FP Grado Superior;1º;DAW1;Mañana;Entornos de Desarrollo;3;107;normal
+FP Grado Medio;1º;SMR1;Mañana;Montaje y Mantenimiento;7;227;normal
+FP Grado Medio;1º;SMR1;Mañana;Sistemas Operativos Monopuesto;7;227;normal
+FP Grado Medio;1º;SMR1;Mañana;Aplicaciones Ofimáticas;7;227;normal
+FP Grado Medio;1º;SMR1;Mañana;Redes Locales;6;107|227;normal
+Bachillerato;1º;1ºB;Mañana;Digitalización (desdoble);1;;relleno
+FP Grado Medio;1º;SMR1;Mañana;Tutoría SMR1;1;;relleno
+FP Grado Superior;2º;DAW2;Tarde;Desarrollo Web Entorno Cliente;6;107;normal
+FP Grado Superior;2º;DAW2;Tarde;Desarrollo Web Entorno Servidor;8;107;normal
+FP Grado Superior;2º;DAW2;Tarde;Despliegue de Aplicaciones Web;4;107|227;normal
+FP Grado Superior;2º;DAW2;Tarde;Diseño de Interfaces Web;6;227;normal
+FP Grado Medio;2º;SMR2;Tarde;Sistemas Operativos en Red;7;227;normal
+FP Grado Medio;2º;SMR2;Tarde;Servicios en Red;6;107|227;normal
+FP Grado Medio;2º;SMR2;Tarde;Seguridad Informática;5;107|227;normal
+FP Grado Medio;2º;SMR2;Tarde;Tutoría SMR2;1;;relleno
+ESO;4º;4ºA;Mañana;Digitalización (dpto. Tecnología);3;;fuera_del_reparto

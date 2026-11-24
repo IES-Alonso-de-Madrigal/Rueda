@@ -1,0 +1,1541 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "db95f3b0-c122-4418-93e4-bd128bac1f93",
+  "prevId": "e3a10bb6-ddf0-4a88-a9a2-e472f1e66b7a",
+  "tables": {
+    "accesos": {
+      "name": "accesos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "profesor_id": {
+          "name": "profesor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "curso_id": {
+          "name": "curso_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "token_hash": {
+          "name": "token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "codigo_corto_hash": {
+          "name": "codigo_corto_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "caduca_en": {
+          "name": "caduca_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "revocado": {
+          "name": "revocado",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "accesos_token_hash_unique": {
+          "name": "accesos_token_hash_unique",
+          "columns": [
+            "token_hash"
+          ],
+          "isUnique": true
+        },
+        "accesos_codigo_corto_hash_unique": {
+          "name": "accesos_codigo_corto_hash_unique",
+          "columns": [
+            "codigo_corto_hash"
+          ],
+          "isUnique": true
+        },
+        "accesos_profesor_idx": {
+          "name": "accesos_profesor_idx",
+          "columns": [
+            "profesor_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "accesos_profesor_id_profesores_id_fk": {
+          "name": "accesos_profesor_id_profesores_id_fk",
+          "tableFrom": "accesos",
+          "tableTo": "profesores",
+          "columnsFrom": [
+            "profesor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "accesos_curso_id_cursos_academicos_id_fk": {
+          "name": "accesos_curso_id_cursos_academicos_id_fk",
+          "tableFrom": "accesos",
+          "tableTo": "cursos_academicos",
+          "columnsFrom": [
+            "curso_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "asignaciones": {
+      "name": "asignaciones",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "reparto_id": {
+          "name": "reparto_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "grupo_id": {
+          "name": "grupo_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "participante_id": {
+          "name": "participante_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "origen": {
+          "name": "origen",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "numero_ronda": {
+          "name": "numero_ronda",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "nota": {
+          "name": "nota",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "registrado_por_id": {
+          "name": "registrado_por_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "asignaciones_grupo_id_unique": {
+          "name": "asignaciones_grupo_id_unique",
+          "columns": [
+            "grupo_id"
+          ],
+          "isUnique": true
+        },
+        "asignaciones_reparto_idx": {
+          "name": "asignaciones_reparto_idx",
+          "columns": [
+            "reparto_id"
+          ],
+          "isUnique": false
+        },
+        "asignaciones_participante_idx": {
+          "name": "asignaciones_participante_idx",
+          "columns": [
+            "participante_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "asignaciones_reparto_id_repartos_id_fk": {
+          "name": "asignaciones_reparto_id_repartos_id_fk",
+          "tableFrom": "asignaciones",
+          "tableTo": "repartos",
+          "columnsFrom": [
+            "reparto_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "asignaciones_grupo_id_grupos_id_fk": {
+          "name": "asignaciones_grupo_id_grupos_id_fk",
+          "tableFrom": "asignaciones",
+          "tableTo": "grupos",
+          "columnsFrom": [
+            "grupo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "asignaciones_participante_id_participantes_id_fk": {
+          "name": "asignaciones_participante_id_participantes_id_fk",
+          "tableFrom": "asignaciones",
+          "tableTo": "participantes",
+          "columnsFrom": [
+            "participante_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "asignaciones_registrado_por_id_profesores_id_fk": {
+          "name": "asignaciones_registrado_por_id_profesores_id_fk",
+          "tableFrom": "asignaciones",
+          "tableTo": "profesores",
+          "columnsFrom": [
+            "registrado_por_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "centros": {
+      "name": "centros",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "codigo": {
+          "name": "codigo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "localidad": {
+          "name": "localidad",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "cursos_academicos": {
+      "name": "cursos_academicos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "estado": {
+          "name": "estado",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'activo'"
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "cursos_academicos_nombre_unique": {
+          "name": "cursos_academicos_nombre_unique",
+          "columns": [
+            "nombre"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "departamentos": {
+      "name": "departamentos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "departamentos_nombre_unique": {
+          "name": "departamentos_nombre_unique",
+          "columns": [
+            "nombre"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "especialidades": {
+      "name": "especialidades",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "codigo": {
+          "name": "codigo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "especialidades_codigo_unique": {
+          "name": "especialidades_codigo_unique",
+          "columns": [
+            "codigo"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "eventos": {
+      "name": "eventos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "reparto_id": {
+          "name": "reparto_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "datos_json": {
+          "name": "datos_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "actor_id": {
+          "name": "actor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "eventos_reparto_idx": {
+          "name": "eventos_reparto_idx",
+          "columns": [
+            "reparto_id",
+            "id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "eventos_reparto_id_repartos_id_fk": {
+          "name": "eventos_reparto_id_repartos_id_fk",
+          "tableFrom": "eventos",
+          "tableTo": "repartos",
+          "columnsFrom": [
+            "reparto_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "eventos_actor_id_profesores_id_fk": {
+          "name": "eventos_actor_id_profesores_id_fk",
+          "tableFrom": "eventos",
+          "tableTo": "profesores",
+          "columnsFrom": [
+            "actor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "excepciones_elegibilidad": {
+      "name": "excepciones_elegibilidad",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "reparto_id": {
+          "name": "reparto_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "participante_id": {
+          "name": "participante_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "grupo_id": {
+          "name": "grupo_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "motivo": {
+          "name": "motivo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "creado_por_id": {
+          "name": "creado_por_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "excepciones_part_grupo_uidx": {
+          "name": "excepciones_part_grupo_uidx",
+          "columns": [
+            "participante_id",
+            "grupo_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "excepciones_elegibilidad_reparto_id_repartos_id_fk": {
+          "name": "excepciones_elegibilidad_reparto_id_repartos_id_fk",
+          "tableFrom": "excepciones_elegibilidad",
+          "tableTo": "repartos",
+          "columnsFrom": [
+            "reparto_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "excepciones_elegibilidad_participante_id_participantes_id_fk": {
+          "name": "excepciones_elegibilidad_participante_id_participantes_id_fk",
+          "tableFrom": "excepciones_elegibilidad",
+          "tableTo": "participantes",
+          "columnsFrom": [
+            "participante_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "excepciones_elegibilidad_grupo_id_grupos_id_fk": {
+          "name": "excepciones_elegibilidad_grupo_id_grupos_id_fk",
+          "tableFrom": "excepciones_elegibilidad",
+          "tableTo": "grupos",
+          "columnsFrom": [
+            "grupo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "excepciones_elegibilidad_creado_por_id_profesores_id_fk": {
+          "name": "excepciones_elegibilidad_creado_por_id_profesores_id_fk",
+          "tableFrom": "excepciones_elegibilidad",
+          "tableTo": "profesores",
+          "columnsFrom": [
+            "creado_por_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "grupo_especialidades": {
+      "name": "grupo_especialidades",
+      "columns": {
+        "grupo_id": {
+          "name": "grupo_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "especialidad_id": {
+          "name": "especialidad_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "grupo_especialidades_grupo_id_grupos_id_fk": {
+          "name": "grupo_especialidades_grupo_id_grupos_id_fk",
+          "tableFrom": "grupo_especialidades",
+          "tableTo": "grupos",
+          "columnsFrom": [
+            "grupo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "grupo_especialidades_especialidad_id_especialidades_id_fk": {
+          "name": "grupo_especialidades_especialidad_id_especialidades_id_fk",
+          "tableFrom": "grupo_especialidades",
+          "tableTo": "especialidades",
+          "columnsFrom": [
+            "especialidad_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "grupo_especialidades_grupo_id_especialidad_id_pk": {
+          "columns": [
+            "grupo_id",
+            "especialidad_id"
+          ],
+          "name": "grupo_especialidades_grupo_id_especialidad_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "grupos": {
+      "name": "grupos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "reparto_id": {
+          "name": "reparto_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ensenanza": {
+          "name": "ensenanza",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "curso": {
+          "name": "curso",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "nombre_grupo": {
+          "name": "nombre_grupo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "turno": {
+          "name": "turno",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'Diurno'"
+        },
+        "materia": {
+          "name": "materia",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "horas_semanales": {
+          "name": "horas_semanales",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'normal'"
+        },
+        "profesor_externo": {
+          "name": "profesor_externo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "notas": {
+          "name": "notas",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "grupos_reparto_idx": {
+          "name": "grupos_reparto_idx",
+          "columns": [
+            "reparto_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "grupos_reparto_id_repartos_id_fk": {
+          "name": "grupos_reparto_id_repartos_id_fk",
+          "tableFrom": "grupos",
+          "tableTo": "repartos",
+          "columnsFrom": [
+            "reparto_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "items_lista": {
+      "name": "items_lista",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "lista_id": {
+          "name": "lista_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "grupo_id": {
+          "name": "grupo_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "posicion": {
+          "name": "posicion",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "items_lista_lista_grupo_uidx": {
+          "name": "items_lista_lista_grupo_uidx",
+          "columns": [
+            "lista_id",
+            "grupo_id"
+          ],
+          "isUnique": true
+        },
+        "items_lista_lista_pos_idx": {
+          "name": "items_lista_lista_pos_idx",
+          "columns": [
+            "lista_id",
+            "posicion"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "items_lista_lista_id_listas_id_fk": {
+          "name": "items_lista_lista_id_listas_id_fk",
+          "tableFrom": "items_lista",
+          "tableTo": "listas",
+          "columnsFrom": [
+            "lista_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "items_lista_grupo_id_grupos_id_fk": {
+          "name": "items_lista_grupo_id_grupos_id_fk",
+          "tableFrom": "items_lista",
+          "tableTo": "grupos",
+          "columnsFrom": [
+            "grupo_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "listas": {
+      "name": "listas",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "participante_id": {
+          "name": "participante_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "actualizada_en": {
+          "name": "actualizada_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "listas_participante_id_unique": {
+          "name": "listas_participante_id_unique",
+          "columns": [
+            "participante_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "listas_participante_id_participantes_id_fk": {
+          "name": "listas_participante_id_participantes_id_fk",
+          "tableFrom": "listas",
+          "tableTo": "participantes",
+          "columnsFrom": [
+            "participante_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "participantes": {
+      "name": "participantes",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "reparto_id": {
+          "name": "reparto_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "profesor_id": {
+          "name": "profesor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "orden": {
+          "name": "orden",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "horas_a_cubrir": {
+          "name": "horas_a_cubrir",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 18
+        },
+        "situacion": {
+          "name": "situacion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'definitivo'"
+        },
+        "es_vacante": {
+          "name": "es_vacante",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "turno": {
+          "name": "turno",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "turno_fijado_por_jefe": {
+          "name": "turno_fijado_por_jefe",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "motivo_reduccion": {
+          "name": "motivo_reduccion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "pendiente_de_cuadrar": {
+          "name": "pendiente_de_cuadrar",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        }
+      },
+      "indexes": {
+        "participantes_reparto_profesor_uidx": {
+          "name": "participantes_reparto_profesor_uidx",
+          "columns": [
+            "reparto_id",
+            "profesor_id"
+          ],
+          "isUnique": true
+        },
+        "participantes_reparto_orden_idx": {
+          "name": "participantes_reparto_orden_idx",
+          "columns": [
+            "reparto_id",
+            "orden"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "participantes_reparto_id_repartos_id_fk": {
+          "name": "participantes_reparto_id_repartos_id_fk",
+          "tableFrom": "participantes",
+          "tableTo": "repartos",
+          "columnsFrom": [
+            "reparto_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "participantes_profesor_id_profesores_id_fk": {
+          "name": "participantes_profesor_id_profesores_id_fk",
+          "tableFrom": "participantes",
+          "tableTo": "profesores",
+          "columnsFrom": [
+            "profesor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "profesor_especialidades": {
+      "name": "profesor_especialidades",
+      "columns": {
+        "profesor_id": {
+          "name": "profesor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "especialidad_id": {
+          "name": "especialidad_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "profesor_especialidades_profesor_id_profesores_id_fk": {
+          "name": "profesor_especialidades_profesor_id_profesores_id_fk",
+          "tableFrom": "profesor_especialidades",
+          "tableTo": "profesores",
+          "columnsFrom": [
+            "profesor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "profesor_especialidades_especialidad_id_especialidades_id_fk": {
+          "name": "profesor_especialidades_especialidad_id_especialidades_id_fk",
+          "tableFrom": "profesor_especialidades",
+          "tableTo": "especialidades",
+          "columnsFrom": [
+            "especialidad_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "profesor_especialidades_profesor_id_especialidad_id_pk": {
+          "columns": [
+            "profesor_id",
+            "especialidad_id"
+          ],
+          "name": "profesor_especialidades_profesor_id_especialidad_id_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "profesores": {
+      "name": "profesores",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "apellidos": {
+          "name": "apellidos",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "es_jefatura": {
+          "name": "es_jefatura",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "activo": {
+          "name": "activo",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": true
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "profesores_email_unique": {
+          "name": "profesores_email_unique",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "repartos": {
+      "name": "repartos",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "curso_id": {
+          "name": "curso_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "departamento_id": {
+          "name": "departamento_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "jefe_id": {
+          "name": "jefe_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "estado": {
+          "name": "estado",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'Borrador'"
+        },
+        "restringir_por_turno": {
+          "name": "restringir_por_turno",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "ronda_actual": {
+          "name": "ronda_actual",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "version": {
+          "name": "version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "ventana_hasta": {
+          "name": "ventana_hasta",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "bloqueo_participante_id": {
+          "name": "bloqueo_participante_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "bloqueo_siguiente_indice": {
+          "name": "bloqueo_siguiente_indice",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "justificacion_cierre": {
+          "name": "justificacion_cierre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "asistentes_json": {
+          "name": "asistentes_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "foto_inicial_json": {
+          "name": "foto_inicial_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "iniciado_en": {
+          "name": "iniciado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "cerrado_en": {
+          "name": "cerrado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "repartos_curso_departamento_uidx": {
+          "name": "repartos_curso_departamento_uidx",
+          "columns": [
+            "curso_id",
+            "departamento_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {
+        "repartos_curso_id_cursos_academicos_id_fk": {
+          "name": "repartos_curso_id_cursos_academicos_id_fk",
+          "tableFrom": "repartos",
+          "tableTo": "cursos_academicos",
+          "columnsFrom": [
+            "curso_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "repartos_departamento_id_departamentos_id_fk": {
+          "name": "repartos_departamento_id_departamentos_id_fk",
+          "tableFrom": "repartos",
+          "tableTo": "departamentos",
+          "columnsFrom": [
+            "departamento_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "repartos_jefe_id_profesores_id_fk": {
+          "name": "repartos_jefe_id_profesores_id_fk",
+          "tableFrom": "repartos",
+          "tableTo": "profesores",
+          "columnsFrom": [
+            "jefe_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "sesiones": {
+      "name": "sesiones",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "profesor_id": {
+          "name": "profesor_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token_hash": {
+          "name": "token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "caduca_en": {
+          "name": "caduca_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "sesiones_token_hash_unique": {
+          "name": "sesiones_token_hash_unique",
+          "columns": [
+            "token_hash"
+          ],
+          "isUnique": true
+        },
+        "sesiones_profesor_idx": {
+          "name": "sesiones_profesor_idx",
+          "columns": [
+            "profesor_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "sesiones_profesor_id_profesores_id_fk": {
+          "name": "sesiones_profesor_id_profesores_id_fk",
+          "tableFrom": "sesiones",
+          "tableTo": "profesores",
+          "columnsFrom": [
+            "profesor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "setup_tokens": {
+      "name": "setup_tokens",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "token_hash": {
+          "name": "token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "usado": {
+          "name": "usado",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": false
+        },
+        "caduca_en": {
+          "name": "caduca_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(datetime('now'))"
+        }
+      },
+      "indexes": {
+        "setup_tokens_token_hash_unique": {
+          "name": "setup_tokens_token_hash_unique",
+          "columns": [
+            "token_hash"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
